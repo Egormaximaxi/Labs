@@ -17,19 +17,8 @@ class Calendar:
         Example:
         >>> date = Calendar(2,10,1980)
         """
-        self.day = None
-        self.month = None
-        if not isinstance(year, int):
-            raise TypeError("Параметр 'year' должен быть типа 'int'")
-        self.year = year
-        self.init_attrs(day, month)
-
-    def init_attrs(self, day, month):
-        """ Метод проверяет правильность введенных пользователем данных.
-        Используется для сокращения записи в конструкторе(__init__).
-        """
-        if not isinstance(day, int) or not isinstance(month, int):
-            raise TypeError("Параметры 'day' и 'month' должны быть типа 'int' ")
+        if not isinstance(day, int) or not isinstance(month, int) or not isinstance(year, int):
+            raise TypeError("Параметры 'day', 'month' и 'year' должны быть типа 'int' ")
         if day > 31 or day <= 0:
             raise ValueError("Некорректное значение параметра 'day' ")
         if month <= 0 or month > 12:
@@ -37,6 +26,7 @@ class Calendar:
 
         self.day = day
         self.month = month
+        self.year = year
 
 
     def current_date(self) -> str:
