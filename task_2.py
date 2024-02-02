@@ -21,8 +21,10 @@ class Book(BaseModel):
     pages: int
 
 
-class Library(BaseModel):
-    books: List[Book] = []
+class Library:
+
+    def __init__(self, books: List[Book] = None):
+        self.books = books
 
     def get_next_book_id(self):
         if self.books:
@@ -31,9 +33,9 @@ class Library(BaseModel):
             return 1
 
     def get_index_by_book_id(self, user_id: int) -> int:
-        for book in self.books:
+        for index, book in enumerate(self.books):
             if book.id_ == user_id:
-                return self.books.index(book)
+                return index
         raise ValueError("Книги с запрашиваемым id не существует.")
 
 
