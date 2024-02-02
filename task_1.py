@@ -19,15 +19,17 @@ class Calendar:
         """
         self.day = None
         self.month = None
-        self.year = None
-        self.init_attrs(day, month, year)
+        if not isinstance(year, int):
+            raise TypeError("Параметр 'year' должен быть типа 'int'")
+        self.year = year
+        self.init_attrs(day, month)
 
-    def init_attrs(self, day, month, year):
+    def init_attrs(self, day, month):
         """ Метод проверяет правильность введенных пользователем данных.
         Используется для сокращения записи в конструкторе(__init__).
         """
-        if not isinstance(day, int) or not isinstance(month, int) or not isinstance(year, int):
-            raise TypeError("Параметры 'day','month','year' должны быть типа 'int'")
+        if not isinstance(day, int) or not isinstance(month, int):
+            raise TypeError("Параметры 'day' и 'month' должны быть типа 'int' ")
         if day > 31 or day <= 0:
             raise ValueError("Некорректное значение параметра 'day' ")
         if month <= 0 or month > 12:
@@ -35,9 +37,9 @@ class Calendar:
 
         self.day = day
         self.month = month
-        self.year = year
 
-    def current_date(self):
+
+    def current_date(self) -> str:
         """ Метод вывыводит на экран текущую дату.
 
         :return: Строка в формате XX.XX.XXXX
@@ -53,7 +55,7 @@ class Calendar:
         else:
             return f"Текущая дата: {self.day}.{self.month}.{- self.year} до н.э."
 
-    def next_day(self):
+    def next_day(self) -> int:
         """ Метод позволяет получить следующий за текущим день.
 
         :return: Число, соотвествующее следующему дню.
