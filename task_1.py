@@ -3,6 +3,8 @@ class Glasses:
     Документация на родительский класс.
     Класс описывает модель очков.
     """
+    current_money = 20000  # Количество денег у покупателя при входе в магазин
+
     def __init__(self, brand: str, price: int) -> None:
         """
         Инициализация экземпляра класса.
@@ -42,6 +44,22 @@ class Glasses:
         Glasses("Armani", 3000)
         """
         return f'{self.__class__.__name__}("{self._brand}", {self.price})'
+
+    def is_buy(self) -> str:
+        """
+        Метод дает понять покупателю, хватит ли ему средств на покупку данной модели очков.
+
+
+        Example:
+        >>> glasses = Glasses("Armani", 3000)
+        >>> print(glasses.is_buy())
+        Вы можете купить данные очки бренда "Armani"!
+        """
+
+        if self.current_money >= self.price:
+            return f'Вы можете купить данные очки бренда "{self._brand}"!'
+        else:
+            return f'Вам не хватает средств на данные очки бренда "{self._brand}"!'
 
 
 class Sunglasses(Glasses):
@@ -93,6 +111,22 @@ class Sunglasses(Glasses):
         Sunglasses("Armani", 3000, "Black")
         """
         return f'{self.__class__.__name__}("{self._brand}", {self.price}, "{self.lens_color}")'
+
+    def is_buy(self) -> str:
+        """
+        Метод дает понять покупателю, хватит ли ему средств на покупку данной модели очков.
+
+
+        Example:
+        >>> glasses = Glasses("Armani", 3000)
+        >>> print(glasses.is_buy())
+        Вы можете купить данные очки бренда "Armani"!
+        """
+
+        if self.current_money >= self.price:
+            return f'Вы можете купить данные солнцезащитные очки бренда "{self._brand}"!'
+        else:
+            return f'Вам не хватает средств на данные солнцезащитные очки бренда "{self._brand}"!'
 
     """Устанавливаю свойство для отличительного атрибута lens_color."""
     @property
